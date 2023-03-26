@@ -70,4 +70,58 @@ public class AppTest {
         assertEquals(1,result);
         service.deleteStudent("7");
     }
+
+    @Test
+    public void tc_5_saveInvalidIDStudent(){
+        int result = 0;
+        try{
+            result =service.saveStudent(null,"Alex",155);
+            assertEquals(1,result);
+        }catch (ValidationException e){
+            assertEquals(0,result);
+        }
+
+        try{
+            result =service.saveStudent("","Alex",155);
+            assertEquals(1,result);
+        }catch (ValidationException e){
+            assertEquals(0,result);
+        }
+    }
+
+    @Test
+    public void tc_6_saveValidIdStudent(){
+        int result = service.saveStudent("7","Alex",932);
+        Iterable<Student> students = service.findAllStudents();
+        assertEquals(5,students.spliterator().getExactSizeIfKnown());
+        assertEquals(1,result);
+        service.deleteStudent("7");
+    }
+
+    @Test
+    public void tc_7_saveInvalidNameStudent(){
+        int result = 0;
+        try{
+            result =service.saveStudent("9","",155);
+            assertEquals(1,result);
+        }catch (ValidationException e){
+            assertEquals(0,result);
+        }
+
+        try{
+            result =service.saveStudent("9",null,155);
+            assertEquals(1,result);
+        }catch (ValidationException e){
+            assertEquals(0,result);
+        }
+    }
+
+    @Test
+    public void tc_8_saveValidNameStudent(){
+        int result = service.saveStudent("7","Alex",932);
+        Iterable<Student> students = service.findAllStudents();
+        assertEquals(5,students.spliterator().getExactSizeIfKnown());
+        assertEquals(1,result);
+        service.deleteStudent("7");
+    }
 }
