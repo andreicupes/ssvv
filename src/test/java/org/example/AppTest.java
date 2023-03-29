@@ -128,7 +128,6 @@ public class AppTest {
 
     @Test
     public void tc_9_saveValidIdTema(){
-
         int result = service.saveTema("7","new tema",5,3);
         service.deleteTema("7");
         assertEquals(1,result);
@@ -141,5 +140,39 @@ public class AppTest {
         assertEquals(1,result);
     }
 
+//    if (tema.getDescriere() == null || tema.getDescriere().equals("")) {
+//        throw new ValidationException("Descriere invalida! \n");
+//    }
+//        if (tema.getDeadline() < 1 || tema.getDeadline() > 14 || tema.getDeadline() < tema.getStartline()) {
+//        throw new ValidationException("Deadline invalid! \n");
+//    }
+//        if (tema.getStartline() < 1 || tema.getStartline() > 14 || tema.getStartline() > tema.getDeadline()) {
+//        throw new ValidationException("Data de primire invalida! \n");
+//    }
+    @Test
+    public void tc_11_saveValidTema(){
+        int result = service.saveTema("7","new tema",5,3);
+        service.deleteTema("7");
+        assertEquals(1,result);
+
+    }
+
+    @Test
+    public void tc_12_saveInvalidDescTema(){
+        int result = service.saveTema("7","",5,3);
+        assertEquals(1,result);
+    }
+
+    @Test
+    public void tc_13_saveInvalidDeadlineTema(){
+        int result = service.saveTema("7","new tema",0,3);
+        assertEquals(1,result);
+    }
+
+    @Test
+    public void tc_14_saveInvalidStartlineTema(){
+        int result = service.saveTema("7","new tema",5,0);
+        assertEquals(1,result);
+    }
 
 }
