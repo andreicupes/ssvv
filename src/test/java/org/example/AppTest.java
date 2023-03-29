@@ -124,4 +124,20 @@ public class AppTest {
         assertEquals(1,result);
         service.deleteStudent("7");
     }
+
+
+    @Test
+    public void tc_9_saveValidIdTema(){
+        int result = service.saveTema("7","new tema",5,3);
+        assertEquals(0,result);
+        service.deleteTema("7");
+    }
+
+    @Test
+    public void tc_10_saveInvalidIdTema(){
+        int result = service.saveTema("","new tema",5,3);
+        assertEquals(1,result);
+    }
+
+
 }
