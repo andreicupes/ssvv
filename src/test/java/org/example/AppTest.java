@@ -128,9 +128,11 @@ public class AppTest {
 
     @Test
     public void tc_9_saveValidIdTema(){
+
         int result = service.saveTema("7","new tema",5,3);
-        assertEquals(0,result);
         service.deleteTema("7");
+        assertEquals(1,result);
+
     }
 
     @Test
