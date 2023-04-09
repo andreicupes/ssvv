@@ -175,4 +175,11 @@ public class AppTest {
         assertEquals(1,result);
     }
 
+    @Test
+    public void tc_15_saveTemaRepo(){
+        Tema t = new Tema("99","test",9,7);
+        Tema result = fileRepository2.save(t);
+        assertEquals(t,result);
+    }
+
 }
