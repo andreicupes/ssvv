@@ -182,4 +182,44 @@ public class AppTest {
         assertEquals(t,result);
     }
 
+    @Test
+    public void tc_16_saveValidIdTema(){
+        int result = service.saveTema("7","new tema",5,3);
+        service.deleteTema("7");
+        assertEquals(1,result);
+
+    }
+
+    @Test
+    public void tc_17_saveExistingStudent(){
+        int result = service.saveStudent("5","Alex",932);
+//        service.deleteStudent("5");
+        assertEquals(0,result);
+
+    }
+
+    @Test
+    public void tc_18_saveInvalidGrade(){
+        int result = service.saveNota("56","7",9,2,"feedback");
+        assertEquals(-1,result);
+
+    }
+
+    @Test
+    public void tc_19_Integrate(){
+
+        int result1 = service.saveNota("56","7",9,2,"feedback");
+        int result2 = service.saveStudent("5","Alex",932);
+        int result3 = service.saveTema("7","new tema",5,3);
+        service.deleteTema("7");
+
+
+
+        assertEquals(-1,result1);
+        assertEquals(0,result2);
+        assertEquals(1,result3);
+
+    }
+
+
 }
