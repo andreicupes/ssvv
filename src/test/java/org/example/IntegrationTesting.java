@@ -66,5 +66,48 @@ public class IntegrationTesting {
 
     }
 
+    @Test
+    public void tc_20_Incremental1(){
+
+        int result2 = service.saveStudent("53","Alex",932);
+        service.deleteStudent("53");
+
+        assertEquals(1,result2);
+
+    }
+    @Test
+    public void tc_21_Incremental2(){
+
+        int result2 = service.saveStudent("53","Alex",932);
+        int result3 = service.saveTema("74","new tema",5,3);
+        service.deleteTema("74");
+        service.deleteStudent("53");
+
+
+        assertEquals(1,result2);
+        assertEquals(1,result3);
+
+    }
+
+    @Test
+    public void tc_22_Incremental3(){
+
+
+        int result2 = service.saveStudent("53","Alex",932);
+        int result3 = service.saveTema("74","new tema",5,3);
+        int result1 = service.saveNota("53","74",9,2,"feedback");
+        service.deleteTema("74");
+        service.deleteStudent("53");
+
+
+        assertEquals(1,result1);
+        assertEquals(1,result2);
+        assertEquals(1,result3);
+
+    }
+
+
+
+
 
 }
