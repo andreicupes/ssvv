@@ -16,4 +16,8 @@
         <Nume>Alex</Nume>
         <Grupa>932</Grupa>
     </student>
+    <student ID="19">
+        <Nume>Alex</Nume>
+        <Grupa>932</Grupa>
+    </student>
 </Entitati>
