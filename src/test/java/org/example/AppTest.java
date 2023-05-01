@@ -10,11 +10,25 @@ import org.example.domain.Tema;
 import org.example.repository.NotaXMLRepository;
 import org.example.repository.StudentXMLRepository;
 import org.example.repository.TemaXMLRepository;
+import org.junit.Before;
 import org.junit.Test;
 
 import org.example.service.Service;
 import org.example.validation.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
+
+
+@ExtendWith(MockitoExtension.class)
 public class AppTest {
     private Validator<Student> studentValidator = new StudentValidator();
     private Validator<Tema> temaValidator = new TemaValidator();
@@ -216,23 +230,54 @@ public class AppTest {
         assertEquals(1,result3);
 
     }
+    @Mock
+    private Student s;
+    @Mock
+    private Tema t;
+
+
+    @Before
+    public void createMocks() {
+        MockitoAnnotations.initMocks(this);
+        s=mock(Student.class,withSettings()
+                .defaultAnswer(RETURNS_SMART_NULLS));
+        t=mock(Tema.class,withSettings()
+                .defaultAnswer(RETURNS_SMART_NULLS));
+
+
+    }
 
     @Test
     public void tc_20_Incremental1(){
 
-        int result2 = service.saveStudent("53","Alex",932);
-        service.deleteStudent("53");
+//        int result2 = service.saveStudent("53","Alex",932);
+//        service.deleteStudent("53");
+//
+//        assertEquals(1,result2);
 
+        //        s=mock(Student.class);
+        int result2 = service.saveStudent(s.getID(),s.getNume(),s.getGrupa());
         assertEquals(1,result2);
+        reset(s);
 
     }
     @Test
     public void tc_21_Incremental2(){
+//
+//        int result2 = service.saveStudent("53","Alex",932);
+//        int result3 = service.saveTema("74","new tema",5,3);
+//        service.deleteTema("74");
+//        service.deleteStudent("53");
+//
+//
+//        assertEquals(1,result2);
+//        assertEquals(1,result3);
 
-        int result2 = service.saveStudent("53","Alex",932);
-        int result3 = service.saveTema("74","new tema",5,3);
-        service.deleteTema("74");
-        service.deleteStudent("53");
+        //        s=mock(Student.class);
+//        t=mock(Tema.class);
+        int result2 = service.saveStudent(s.getID(),s.getNume(),s.getGrupa());
+        int result3 = service.saveTema(t.getID(),t.getDescriere(),t.getDeadline(),t.getStartline());
+        reset(s,t);
 
 
         assertEquals(1,result2);
@@ -244,16 +289,30 @@ public class AppTest {
     public void tc_22_Incremental3(){
 
 
-        int result2 = service.saveStudent("53","Alex",932);
-        int result3 = service.saveTema("74","new tema",5,3);
-        int result1 = service.saveNota("53","74",9,2,"feedback");
-        service.deleteTema("74");
-        service.deleteStudent("53");
+//        int result2 = service.saveStudent("53","Alex",932);
+//        int result3 = service.saveTema("74","new tema",5,3);
+//        int result1 = service.saveNota("53","74",9,2,"feedback");
+//        service.deleteTema("74");
+//        service.deleteStudent("53");
+//
+//
+//        assertEquals(1,result1);
+//        assertEquals(1,result2);
+//        assertEquals(1,result3);
 
 
-        assertEquals(1,result1);
+//        s=mock(Student.class);
+//        t=mock(Tema.class);
+
+        int result2 = service.saveStudent(s.getID(),s.getNume(),s.getGrupa());
+        int result3 = service.saveTema(t.getID(),t.getDescriere(),t.getDeadline(),t.getStartline());
+        int result1 = service.saveNota(s.getID(),t.getID(),9,1,"feedback");
+        reset(s,t);
+
+
         assertEquals(1,result2);
         assertEquals(1,result3);
+        assertEquals(-1,result1);
 
     }
 
